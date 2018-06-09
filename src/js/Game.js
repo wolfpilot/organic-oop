@@ -2,6 +2,7 @@
 import Engine from './core/Engine';
 import Canvas from './actors/Canvas';
 import Creature from './actors/Creature';
+import * as GUI from './interface/GUI';
 
 class Game {
     _state = {
@@ -31,8 +32,11 @@ class Game {
         this._canvas = new Canvas(canvasEl);
         this._creature = new Creature(ctx);
 
+        this._engine.init();
         this._canvas.init();
         this._creature.init();
+
+        GUI.init();
     }
 
     /**
