@@ -10,8 +10,17 @@ class Creature {
         this._ctx = ctx;
     }
 
+    // @TODO: Create a patterns config. (single) pulse is just one config
     static config = {
-        pulseSpeed: 2000
+        pulseSpeed: 2000,
+        radius: {
+            start: 50,
+            end: 0
+        },
+        opacity: {
+            start: 0,
+            end: 1
+        }
     };
 
     _state = {
@@ -20,10 +29,7 @@ class Creature {
                 prevTick: 0,
                 x: window.innerWidth / 2,
                 y: window.innerHeight / 2,
-                startRadius: 50,
-                endRadius: 0,
                 radius: 50,
-                defaultOpacity: 0,
                 lineWidth: 2,
                 strokeStyle: {
                     r: 255,
@@ -35,7 +41,6 @@ class Creature {
         ]
     };
 
-
     /**
      * Update pulse opacity
      * @param {Object} state - Old state
@@ -45,11 +50,11 @@ class Creature {
      */
     static _updateOpacity(state, elapsedLifecyclePercentage) {
         if (elapsedLifecyclePercentage === 0) {
-            return 0;
+            return Creature.config.opacity.start;
         }
 
         // The rate of change
-        const dx = 1 - state.strokeStyle.a;
+        const dx = Creature.config.opacity.end - state.strokeStyle.a;
 
         state.strokeStyle.a += dx * easeInOutCubic(elapsedLifecyclePercentage / 100);
 
@@ -65,11 +70,11 @@ class Creature {
      */
     static _updateRadius(state, elapsedLifecyclePercentage) {
         if (elapsedLifecyclePercentage === 0) {
-            return state.startRadius;
+            return Creature.config.radius.start;
         }
 
         // The rate of change
-        const dx = 0 - state.radius;
+        const dx = Creature.config.radius.end - state.radius;
 
         state.radius += dx * easeInOutCubic(elapsedLifecyclePercentage / 100);
 
