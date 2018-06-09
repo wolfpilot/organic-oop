@@ -1,6 +1,7 @@
 // Modules
 import Engine from './core/Engine';
 import Canvas from './actors/Canvas';
+import Creature from './actors/Creature';
 
 class Game {
     _state = {
@@ -28,8 +29,10 @@ class Game {
 
         this._engine = new Engine(ctx);
         this._canvas = new Canvas(canvasEl);
+        this._creature = new Creature(ctx);
 
         this._canvas.init();
+        this._creature.init();
     }
 
     /**
