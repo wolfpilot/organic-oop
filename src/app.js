@@ -1,4 +1,4 @@
-import { main } from './js/main';
+import Game from './js/Game';
 
 const isReady = () => {
     return new Promise(resolve => {
@@ -10,4 +10,4 @@ const isReady = () => {
     });
 };
 
-isReady().then(() => main());
+isReady().then(() => Game.init());
