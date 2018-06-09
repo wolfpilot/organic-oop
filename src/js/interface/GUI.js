@@ -8,6 +8,9 @@ const presets = {
     folders: {
         engine: {
             fps: 30
+        },
+        canvas: {
+            fill: '#141414'
         }
     }
 };
@@ -19,11 +22,18 @@ const init = () => {
     const GUI = new dat.GUI();
 
     const engine = GUI.addFolder('Engine');
+    const canvas = GUI.addFolder('Canvas');
 
     engine.add(presets.folders.engine, 'fps', 0, 60, 1)
         .name('FPS')
         .onChange(value => {
             PubSub.publish('gui:engine', { fps: value });
+        });
+
+    canvas.addColor(presets.folders.canvas, 'fill')
+        .name('Fill')
+        .onChange(value => {
+            PubSub.publish('gui:canvas', { fill: value });
         });
 };
 
