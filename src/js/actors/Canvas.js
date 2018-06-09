@@ -31,6 +31,14 @@ class Canvas {
     }
 
     /**
+     * @param {Object} newState - Updated state to be merged
+     * @private
+     */
+    _setState(newState) {
+        this._state = { ...this._state, ...newState };
+    }
+
+    /**
      * @private
      */
     _addEventListeners() {
@@ -38,6 +46,7 @@ class Canvas {
 
         PubSub.subscribe('canvas:clear', ctx => this._clear(ctx));
         PubSub.subscribe('engine:draw', ctx => this._draw(ctx));
+        PubSub.subscribe('gui:canvas', newState => this._setState(newState));
     }
 
     /**

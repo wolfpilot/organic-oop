@@ -39,5 +39,8 @@
     "webpack": "^4.10.2",
     "webpack-cli": "^3.0.1",
     "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.2"
   }
 }
