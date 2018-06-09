@@ -1,5 +1,6 @@
 // Modules
 import Engine from './core/Engine';
+import Input from './interface/Input';
 import Canvas from './actors/Canvas';
 import Creature from './actors/Creature';
 import * as GUI from './interface/GUI';
@@ -24,15 +25,17 @@ class Game {
     /**
      * @private
      */
-    _setup() {
+    _setup() { // eslint-disable-line max-statements
         const canvasEl = document.getElementById('canvas');
         const ctx = canvasEl.getContext('2d');
 
         this._engine = new Engine(ctx);
+        this._input = new Input(canvasEl);
         this._canvas = new Canvas(canvasEl);
         this._creature = new Creature(ctx);
 
         this._engine.init();
+        this._input.init();
         this._canvas.init();
         this._creature.init();
 
