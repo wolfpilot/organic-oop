@@ -42,10 +42,8 @@ class PubSub {
 
             const subID = subcribers.findIndex(sub => sub.token === token);
 
-            if (subID) {
+            if (subID > -1) {
                 this.topics[topic].splice(subID, 1);
-
-                return;
             }
         });
     }
