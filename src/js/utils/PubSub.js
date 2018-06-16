@@ -38,9 +38,9 @@ class PubSub {
         const subscriptions = new Map(Object.entries(this.topics));
 
         // Check existing subscriptions for matching subscriber ID
-        subscriptions.forEach((subcribers, topic) => {
+        subscriptions.forEach((subscribers, topic) => {
 
-            const subID = subcribers.findIndex(sub => sub.token === token);
+            const subID = subscribers.findIndex(sub => sub.token === token);
 
             if (subID > -1) {
                 this.topics[topic].splice(subID, 1);
