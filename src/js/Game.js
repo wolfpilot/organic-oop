@@ -32,7 +32,7 @@ class Game {
         this._engine = new Engine(ctx);
         this._input = new Input(canvasEl);
         this._canvas = new Canvas(canvasEl);
-        this._creature = new Creature(ctx);
+        this._creature = new Creature();
 
         this._engine.init();
         this._input.init();
