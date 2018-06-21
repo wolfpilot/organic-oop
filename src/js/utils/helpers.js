@@ -5,8 +5,15 @@
  * @param {Number} max - The maximum value
  * @returns {number} - Return value that fits within specified parameters
  */
-const valBetween = (v, min, max) => {
+export const valBetween = (v, min, max) => {
     return Math.min(max, Math.max(min, v));
 };
 
-export { valBetween };
+/**
+ * Get a random value from an array
+ * @param {Object} arr - The array to pick from
+ * @returns {*} - Random result
+ */
+export const randomFromArray = arr => {
+    return arr[Math.floor(Math.random() * arr.length)];
+};

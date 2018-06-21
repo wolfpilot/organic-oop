@@ -14,7 +14,7 @@ class Particle {
      * @param {Number} presets.endRadius - Particle radius at death
      * @param {Number} presets.startAlpha - Particle opacity at birth
      * @param {Number} presets.endAlpha - Particle opacity at death
-     * @param {Number} presets.colour - Particle colour
+     * @param {Object} presets.colour - Particle colour
      */
     constructor(presets) {
         this._presets = { ...presets };

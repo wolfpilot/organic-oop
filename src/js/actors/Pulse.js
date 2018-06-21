@@ -1,5 +1,6 @@
 // Utils
 import PubSub from '../utils/PubSub';
+import { randomFromArray } from '../utils/helpers';
 
 // Constants
 import { colours } from '../constants/colours';
@@ -11,20 +12,13 @@ class Pulse {
     /**
      * @param {Number} x - The starting coordinate of the pulse on the X axis
      * @param {Number} y - The starting coordinate of the pulse on the Y axis
+     * @param {Object} pulse - The predefined pulse config
      */
-    constructor(x, y) {
+    constructor(x, y, pulse) {
         this._x = x;
         this._y = y;
+        this._pulse = pulse;
     }
-
-    static presets = {
-        lifespan: 1000, // In milliseconds
-        interval: 1000, // Delay between generating new particles
-        startRadius: 30,
-        endRadius: 35,
-        startAlpha: 0,
-        endAlpha: 1
-    };
 
     _state = {
         particles: [],
@@ -49,14 +43,10 @@ class Pulse {
     _generateParticle() {
         const presets = {
             birthTime: this._state.prevTick,
-            lifespan: Pulse.presets.lifespan,
             x: this._x,
             y: this._y,
-            startRadius: Pulse.presets.startRadius,
-            endRadius: Pulse.presets.endRadius,
-            startAlpha: Pulse.presets.startAlpha,
-            endAlpha: Pulse.presets.endAlpha,
-            colour: colours[Math.floor(Math.random() * colours.length)] // Randomize colour
+            ...this._pulse,
+            colour: randomFromArray(colours)
         };
 
         this._state.particles.push(new Particle(presets));
@@ -68,7 +58,7 @@ class Pulse {
      */
     _update(timestamp) {
         // Generate a new particle each 'x' seconds
-        if (parseInt((timestamp - this._state.prevTick) / Pulse.presets.interval, 10) >= 1) {
+        if (parseInt((timestamp - this._state.prevTick) / this._pulse.interval, 10) >= 1) {
             // Keep an accurate timestamp of when the previous particle was generated
             this._state.prevTick = timestamp;
 
