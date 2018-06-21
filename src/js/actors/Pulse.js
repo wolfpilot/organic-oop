@@ -1,6 +1,9 @@
 // Utils
 import PubSub from '../utils/PubSub';
 
+// Constants
+import { colours } from '../constants/colours';
+
 // Modules
 import Particle from './Particle';
 
@@ -14,10 +17,13 @@ class Pulse {
         this._y = y;
     }
 
-    static defaults = {
-        interval: 1000,
-        radius: 30,
-        lifespan: 5
+    static presets = {
+        lifespan: 1000, // In milliseconds
+        interval: 1000, // Delay between generating new particles
+        startRadius: 30,
+        endRadius: 35,
+        startAlpha: 0,
+        endAlpha: 1
     };
 
     _state = {
@@ -29,14 +35,11 @@ class Pulse {
      * @private
      */
     _updateParticles() {
+        // @NOTE: For more than, say, 10.000 particles think about using a standard 'for' loop
         this._state.particles.forEach((particle, index) => {
             if (!particle.isAlive) {
                 this._state.particles.splice(index, 1);
-
-                return;
             }
-
-            particle.update();
         });
     }
 
@@ -45,10 +48,15 @@ class Pulse {
      */
     _generateParticle() {
         const presets = {
+            birthTime: this._state.prevTick,
+            lifespan: Pulse.presets.lifespan,
             x: this._x,
             y: this._y,
-            radius: Pulse.defaults.radius,
-            lifespan: Pulse.defaults.lifespan
+            startRadius: Pulse.presets.startRadius,
+            endRadius: Pulse.presets.endRadius,
+            startAlpha: Pulse.presets.startAlpha,
+            endAlpha: Pulse.presets.endAlpha,
+            colour: colours[Math.floor(Math.random() * colours.length)] // Randomize colour
         };
 
         this._state.particles.push(new Particle(presets));
@@ -60,7 +68,7 @@ class Pulse {
      */
     _update(timestamp) {
         // Generate a new particle each 'x' seconds
-        if (parseInt((timestamp - this._state.prevTick) / Pulse.defaults.interval, 10) >= 1) {
+        if (parseInt((timestamp - this._state.prevTick) / Pulse.presets.interval, 10) >= 1) {
             // Keep an accurate timestamp of when the previous particle was generated
             this._state.prevTick = timestamp;
 

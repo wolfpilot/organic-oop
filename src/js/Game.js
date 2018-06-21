@@ -29,6 +29,7 @@ class Game {
         const canvasEl = document.getElementById('canvas');
         const ctx = canvasEl.getContext('2d');
 
+        // @TODO: Pass the Canvas instance to the Engine and get the ctx from that
         this._engine = new Engine(ctx);
         this._input = new Input(canvasEl);
         this._canvas = new Canvas(canvasEl);

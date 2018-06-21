@@ -35,6 +35,7 @@ class Engine {
         if (elapsedInterval > fpsInterval) {
             this._state.lastDrawTime = timestamp - (elapsedInterval % fpsInterval);
 
+            // @TODO: Call Canvas.clear() from here?
             PubSub.publish('canvas:clear', this.ctx);
             PubSub.publish('engine:draw', this.ctx);
         }
