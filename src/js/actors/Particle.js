@@ -110,11 +110,6 @@ class Particle {
      * @private
      */
     _setup() {
-        // @TODO: Maybe store global vars such as canvas width/height?
-        this._canvas = document.getElementById('canvas');
-
-        // @TODO: public get() and set() ?
-        // Public property
         this.isAlive = true;
 
         this._state = {
