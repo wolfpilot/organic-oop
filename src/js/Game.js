@@ -1,4 +1,5 @@
 // Utils
+import { requestAnimFrame } from './utils/shims';
 import PubSub from './utils/PubSub';
 
 // Modules
@@ -33,7 +34,7 @@ class Game {
 
         this._engine.run(this._state.elapsedTime);
 
-        requestAnimationFrame(nextTimestamp => this._tick(nextTimestamp));
+        requestAnimFrame(nextTimestamp => this._tick(nextTimestamp));
     }
 
     /**
@@ -62,7 +63,7 @@ class Game {
             this._state.pausedTime = this._state.pausedTime + (this._state.timestamp - this._state.pausedTimestamp);
             this._state.elapsedTime = (this._state.timestamp - Game.defaults.startTimestamp) - this._state.pausedTime;
 
-            requestAnimationFrame(timestamp => this._tick(timestamp));
+            requestAnimFrame(timestamp => this._tick(timestamp));
         }
     }
 
