@@ -43,7 +43,7 @@
     "jsx-quotes": 2, // autofix
     "key-spacing": 2, // autofix
     "keyword-spacing": 2, // autofix
-    "lines-around-comment": [2, {  "beforeLineComment": false, "allowBlockStart": true }], // autofix
+    "lines-around-comment": [2, { "beforeBlockComment": false, "beforeLineComment": false, "allowBlockStart": true }], // autofix
     "lines-around-directive": 2,
     "max-depth": 2,
     "max-nested-callbacks": [2, 3],
