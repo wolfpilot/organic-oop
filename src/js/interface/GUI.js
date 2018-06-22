@@ -5,6 +5,7 @@ import dat from 'dat.gui';
 import PubSub from '../utils/PubSub';
 
 const presets = {
+    pause: false,
     folders: {
         engine: {
             fps: 30
@@ -23,6 +24,12 @@ const init = () => {
 
     const engine = GUI.addFolder('Engine');
     const canvas = GUI.addFolder('Canvas');
+
+    GUI.add(presets, 'pause')
+        .name('Pause')
+        .onChange(value => {
+            PubSub.publish('gui:game', { isPaused: value });
+        });
 
     engine.add(presets.folders.engine, 'fps', 0, 60, 1)
         .name('FPS')
